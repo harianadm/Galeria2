@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -33,6 +34,7 @@ import radaelli.chagas.adami.harian.galeria2.util.Util;
 public class MainActivity extends AppCompatActivity {
 
     static int RESULT_TAKE_PICTURE = 1;
+    static int RESULT_REQUEST_PERMISSION = 1;
 
     String currentPhotoPath;
 
@@ -120,6 +122,20 @@ public class MainActivity extends AppCompatActivity {
             else{
                 File f = new File(currentPhotoPath);
                 f.delete();
+            }
+        }
+    }
+
+    private void checkForPermissions(List<String> permissions){
+        List<String> permissionsNotGranted = new ArrayList<>();
+        for(String permission : permissions){
+            if( !hasPermission(permission)){
+                permissionsNotGranted.add(permission);
+            }
+        }
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            if(permissionsNotGranted.size()>0){
+                /*requestPermissions(permissionsNotGranted.toArray(new String[permissionsNotGranted.size()]));*/
             }
         }
     }
