@@ -4,13 +4,17 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.FileProvider;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
+
+import java.io.File;
 
 import radaelli.chagas.adami.harian.galeria2.util.Util;
 
@@ -38,8 +42,9 @@ public class PhotoActivity extends AppCompatActivity {
         imPhoto.setImageBitmap(bitmap);
     }
 
-    @Override
-    public boolean onOptionsSelected(@NonNull MenuItem item){
+
+
+    public boolean onOptionsItemSelected(@NonNull MenuItem item){
         switch (item.getItemId()){
             case R.id.opShare:
                 sharePhoto();
@@ -48,5 +53,14 @@ public class PhotoActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
 
         }
+    }
+
+    void sharePhoto(){
+        //codigo para compartilhar a foto com outras apps
+        Uri photoUri = FileProvider.getUriForFile(PhotoActivity.this,"radaelli.chagas.adami.harian.galeria2.fileprovider", new File(photoPath));
+        Intent i = new Intent(Intent.ACTION_SEND);
+        i.putExtra(Intent.EXTRA_STREAM, photoUri);
+        i.setType("imagem/jpeg");
+        startActivity(i);
     }
 }
