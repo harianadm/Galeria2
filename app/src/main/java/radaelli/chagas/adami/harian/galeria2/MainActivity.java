@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         mainAdapter = new MainAdapter(MainActivity.this, photos);
 
         RecyclerView rvGallery = findViewById(R.id.rvGallery);
+        rvGallery.setAdapter(mainAdapter);
 
         float w = getResources().getDimension(R.dimen.itemWidth);
         int numberOfColumns = Util.calculateNoOfColumns(MainActivity.this, w);
@@ -115,8 +116,8 @@ public class MainActivity extends AppCompatActivity {
         }
         currentPhotoPath = f.getAbsolutePath();
 
-        if(f!= null){
-            Uri fUri = FileProvider.getUriForFile(MainActivity.this, "radaelli.chagas.adami.harian", f);
+        if(f != null){
+            Uri fUri = FileProvider.getUriForFile(MainActivity.this, "radaelli.chagas.adami.harian.fileprovider", f);
             Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             i.putExtra(MediaStore.EXTRA_OUTPUT, fUri);
             startActivityForResult(i, RESULT_TAKE_PICTURE);

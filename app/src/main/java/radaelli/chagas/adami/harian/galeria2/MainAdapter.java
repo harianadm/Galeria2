@@ -28,7 +28,7 @@ public class MainAdapter extends RecyclerView.Adapter{
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(mainActivity);
         View v = inflater.inflate(R.layout.list_item,parent,false);
-        return nul;
+        return new MyViewHolder(v);
     }
 
     @Override
@@ -48,7 +48,7 @@ public class MainAdapter extends RecyclerView.Adapter{
 
     @Override
     public int getItemCount() {
-        return 0;
+        return photos.size();
     }
 
 }

@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ImageView;
 
@@ -46,11 +48,9 @@ public class PhotoActivity extends AppCompatActivity {
 
     public boolean onOptionsItemSelected(@NonNull MenuItem item){
         switch (item.getItemId()){
-            case R.id.opShare:
-                sharePhoto();
+            case R.id.opShare: sharePhoto();
                 return true;
-            default:
-                return super.onOptionsItemSelected(item);
+            default: return super.onOptionsItemSelected(item);
 
         }
     }
@@ -62,5 +62,13 @@ public class PhotoActivity extends AppCompatActivity {
         i.putExtra(Intent.EXTRA_STREAM, photoUri);
         i.setType("imagem/jpeg");
         startActivity(i);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main_activity_tb,menu);
+        return true;
     }
 }
