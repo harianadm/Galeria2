@@ -106,12 +106,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //recebendo qual foto deve ser aberta por photoActivity e passando o caminho da foto via intent
     public void startPhotoActivity(String photoPath){
         Intent i = new Intent(MainActivity.this, PhotoActivity.class);
         i.putExtra("photo_path", photoPath);
         startActivity(i);
     }
 
+
+    //criando um arquivo vazio na pasta Pictures, definindo um "nome" diferente para cada arquivo
+    //gerando um endereco de URI, iniciando a app da camera e esperando a foto
     private void dispatchTakePictureIntent(){
         File f = null;
         try{
@@ -138,6 +142,8 @@ public class MainActivity extends AppCompatActivity {
         return f;
     }
 
+
+    //adicionando o local da foto na lista caso ela tenha sido tirada, avisando o mainAdapter e atualizando o recycleView
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
         super.onActivityResult(requestCode,resultCode,data);
@@ -153,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //verificando as permissoes necessarias, e pedindo confirmacao das permissoes, caso nao tenham sido concedidas
     private void checkForPermissions(List<String> permissions){
         List<String> permissionsNotGranted = new ArrayList<>();
         for(String permission : permissions){
@@ -167,12 +174,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //verificando se uma permissao foi concedida
     private boolean hasPermission(String permission){
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             return ActivityCompat.checkSelfPermission(MainActivity.this,permission) == PackageManager.PERMISSION_GRANTED;
         }
         return false;
     }
+
+    //verificando se as permissoes foram mesmo concedidas ou nao, informando se ela e realmente necessaria e requisitando novamente se nao tiver sido concedida
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults){
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);

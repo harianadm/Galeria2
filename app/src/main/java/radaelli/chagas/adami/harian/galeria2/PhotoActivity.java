@@ -37,6 +37,7 @@ public class PhotoActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        //obtendo o caminho da foto, carregando a foto em um bitmap e setando o bitmap no imageView
         Intent i = getIntent();
         photoPath = i.getStringExtra("photo_path");
         Bitmap bitmap = Util.getBitmap(photoPath);
