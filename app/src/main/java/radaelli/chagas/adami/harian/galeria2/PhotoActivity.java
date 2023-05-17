@@ -44,8 +44,8 @@ public class PhotoActivity extends AppCompatActivity {
         imPhoto.setImageBitmap(bitmap);
     }
 
-
-
+    //esse metodo sera chamado assim que um item da toolbar for selecionado
+    //ele executa um codigo que compartilha a foto, caso o icone de compartilhar tenha sido clicado
     public boolean onOptionsItemSelected(@NonNull MenuItem item){
         switch (item.getItemId()){
             case R.id.opShare: sharePhoto();
@@ -54,6 +54,7 @@ public class PhotoActivity extends AppCompatActivity {
 
         }
     }
+
 
     void sharePhoto(){
         //codigo para compartilhar a foto com outras apps
@@ -64,6 +65,7 @@ public class PhotoActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    //criando um inflador que cria as opcoes de menu definidas no arquivo passado
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);

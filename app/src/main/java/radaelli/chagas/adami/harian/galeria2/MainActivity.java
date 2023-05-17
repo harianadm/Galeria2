@@ -59,6 +59,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.tbMain);
         setSupportActionBar(toolbar);
 
+
+        //acessando o diretorio Pictures, lendo a lista de fotos ja salvas e adicionando elas na lista de gfotos
         File dir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File[] files = dir.listFiles();
         for(int i = 0; i<files.length; i++){
@@ -69,11 +71,12 @@ public class MainActivity extends AppCompatActivity {
         permissions.add(Manifest.permission.CAMERA);
         checkForPermissions(permissions);
 
+        //criando o mainAdapter e setando no recycleView
         mainAdapter = new MainAdapter(MainActivity.this, photos);
-
         RecyclerView rvGallery = findViewById(R.id.rvGallery);
         rvGallery.setAdapter(mainAdapter);
 
+        //calculando quantas fotoscabem na tela e configurando o grid do recycleView para respeitar o numero maximo de colunas
         float w = getResources().getDimension(R.dimen.itemWidth);
         int numberOfColumns = Util.calculateNoOfColumns(MainActivity.this, w);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(MainActivity.this, numberOfColumns);
@@ -81,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //criando um inflador que cria as opcoes de menu definidas no arquivo passado
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
@@ -89,6 +93,8 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    //esse metodo sera chamado assim que um item da toolbar for selecionado
+    //ele executa um codigo que dispara a camera do celular caso o icone da camera tenha sido clicado
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item){
         switch (item.getItemId()){
