@@ -56,9 +56,8 @@ public class PhotoActivity extends AppCompatActivity {
         }
     }
 
-
+    //codigo para compartilhar a foto com outras apps
     void sharePhoto(){
-        //codigo para compartilhar a foto com outras apps
         Uri photoUri = FileProvider.getUriForFile(PhotoActivity.this,"radaelli.chagas.adami.harian.fileprovider", new File(photoPath));
         Intent i = new Intent(Intent.ACTION_SEND);
         i.putExtra(Intent.EXTRA_STREAM, photoUri);

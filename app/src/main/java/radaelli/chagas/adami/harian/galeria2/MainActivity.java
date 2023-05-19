@@ -114,8 +114,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    //criando um arquivo vazio na pasta Pictures, definindo um "nome" diferente para cada arquivo
-    //gerando um endereco de URI, iniciando a app da camera e esperando a foto
+    //criando um arquivo vazio na pasta pictures
     private void dispatchTakePictureIntent(){
         File f = null;
         try{
@@ -134,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //utilizando a data e a hora para criar um nome de arquivo diferente para cada foto
     private File createImageFile() throws IOException{
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String imageFileName = "JPEG_" + timeStamp;
@@ -194,6 +194,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+        //exibindo uma mensagem informando q a permissao é necessaria e requisitando novamente
         if(permissionsRejected.size()>0){
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
                 if(shouldShowRequestPermissionRationale(permissionsRejected.get(0))){
